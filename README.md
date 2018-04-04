@@ -8,6 +8,7 @@ To do list:
 Courses:
 1. Roughly go through:
     a. Machine learning crash course with TensorFlow API. https://developers.google.cn/machine-learning/crash-course/
+        TensorFlow playground.
     b. Deep learning specialization - Finished courses 1-3(2018.4.4)
     
 Coding exercise - to be planned!!!
