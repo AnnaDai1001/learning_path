@@ -11,7 +11,7 @@ Machine learning crash course with TensorFlow API. https://developers.google.cn/
 TensorFlow playground.
         
 2. Carefully go through:
-a. Deep learning specialization - Finished courses 1-3(2018.4.4)
+* a. Deep learning specialization - Finished courses 1-3(2018.4.4)
 b. Algorithm courses: Peking University 程序设计与算法专项课程
 c. Data science with Python - Michigan
     
