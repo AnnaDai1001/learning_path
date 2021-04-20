@@ -97,12 +97,12 @@ r(
             as.vector(unlist(data_stopwords_smart,recursive = TRUE))
             )
           )
-
+        
         ## clean text
         start_time <- Sys.time()
-        df_txt_clean <- apply(df_txt[,2:3], MARGIN = c(1,2), FUN = Clean_String)
+        df_txt_clean <- apply(df_txt[,2:3], MARGIN = c(1,2), FUN = Clean_String, stopwords_v = stop_total, level_key = mapping)
         print(Sys.time() - start_time)
-
+        
         colnames(df_txt_clean) <- c('accident_txt_clean','injury_txt_clean')
         df_txt <- cbind(df_txt,df_txt_clean)
     }
