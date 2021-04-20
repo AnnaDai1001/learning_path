@@ -47,6 +47,72 @@ tmp.rx('a')
 tmp.rx2('a')
 
 ##### Call R functions
+dt_pkg = packages.importr('data.table')
+# dt_pkg.fread()
+plot_data = r['fread']('04_20_2021_Data.csv', 
+                       encoding = 'UTF-8',
+                       stringsAsFactors = False)
+print(r.head(plot_data))
+
+utils = packages.importr('utils')
+utils.chooseCRANmirror(ind=1)
+from rpy2.robjects.vectors import StrVector
+# Install packages
+packnames = ("data.table", 
+             "rstudioapi",
+             "lda",
+             'stringr',
+             'tidyverse',
+             'tidytext',
+             'DT',
+             'tm',
+             'stopwords',
+             'SnowballC',
+             'dplyr',
+             'textclean',
+             'AUC',
+             'h2o')
+utils.install_packages(StrVector(packnames))
+
+r(
+    '''
+    text_process <- function(df_txt){
+        ## fill in missing text
+        df_txt[is.na(df_txt)] <- 'unknown'
+        df_txt$accident_txt[df_txt$accident_txt==''] <- 'unknown' 
+        df_txt$injury_txt[df_txt$injury_txt==''] <- 'unknown'
+
+        ## remove unusable text
+        df_txt$accident_txt <- stringr::str_replace_all(df_txt$accident_txt,"[^[:graph:]]", " ") 
+        df_txt$injury_txt <- stringr::str_replace_all(df_txt$injury_txt,"[^[:graph:]]", " ") 
+
+        ## word mapping
+        mapping <- readRDS(file = "mapping.RDS")
+
+        ## stopwords
+        stop_add <- readRDS(file = "stop_add.RDS")
+        stop_total <- unique(
+          c(stop_add,
+            as.vector(unlist(data_stopwords_snowball,recursive = TRUE)),
+            as.vector(unlist(data_stopwords_smart,recursive = TRUE))
+            )
+          )
+
+        ## clean text
+        start_time <- Sys.time()
+        df_txt_clean <- apply(df_txt[,2:3], MARGIN = c(1,2), FUN = Clean_String)
+        print(Sys.time() - start_time)
+
+        colnames(df_txt_clean) <- c('accident_txt_clean','injury_txt_clean')
+        df_txt <- cbind(df_txt,df_txt_clean)
+    }
+    '''
+)
+
+df_text2 = r['text_process'](df_text)
+
+
+
 plot_data = r['read.csv']('C:/Users/abdata/Desktop/result_test_win.csv')
 print(r.head(plot_data))
 mtx = r['data.matrix'](plot_data)
@@ -56,3 +122,4 @@ r.png(file="myplot.png", bg="transparent")
 # r.pdf(file="myplot.pdf")
 r.dotchart(mtx)
 r['dev.off']()
+
