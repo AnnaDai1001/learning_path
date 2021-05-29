@@ -2,4 +2,4 @@ Use this folder track my progress on taking the MIT 6.006 Algorithm Thinking cou
 
 The goal is to watch 0.5 video each weekend day.
 
-2021/05/29 Saturday
+
