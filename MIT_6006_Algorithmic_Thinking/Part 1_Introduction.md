@@ -1,7 +1,8 @@
 
-Date: 2021/05/29 Saturday
-Location: SW
-Notes:
+`Date: 2021/05/29 Saturday`
+`Location: SW`
+
+**Notes:**
 1. Course Overview: Efficient procedures to solve large-scale problems; Scalability; Classic data structures (classic algorithms); Real implementation
 2. Content - 8 modules & Problem set
   1) Algorithm thinking -> Peak findings
@@ -39,3 +40,6 @@ Notes:
     Solution 1: Greedy ascent algorithm - O(mn) supposing n rows, m columns
     Solution 2: Binary search - 1) Pick a column j = m/2 and find the global max (i,j) of column j. 2) Find the peak of row i from (i,j). 3) Base case: only one column
       T(n,m) = O(n) + T(n,m/2) = SUM OF log_2(m) O(n) = O(nlog_2(m))
+      
+   
+
